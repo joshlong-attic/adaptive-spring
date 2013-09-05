@@ -1,7 +1,8 @@
-package savetheenvironment;
+package savetheenvironment.embedded;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
@@ -22,23 +23,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import static savetheenvironment.ServiceConfiguration.DEVELOPMENT_PROFILE;
-import static savetheenvironment.ServiceConfiguration.PRODUCTION_PROFILE;
+import static savetheenvironment.embedded.ServiceConfiguration.DEVELOPMENT_PROFILE;
+import static savetheenvironment.embedded.ServiceConfiguration.PRODUCTION_PROFILE;
 
 public class Main {
 
-    public static void main(String[] arrrImAPirate) throws Throwable {
-
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext();
-
+    static void runWithApplicationContext() {
         boolean production = false;
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+        ac.getEnvironment().setActiveProfiles(production ? ServiceConfiguration.PRODUCTION_PROFILE : ServiceConfiguration.DEVELOPMENT_PROFILE);
+        ac.register(ServiceConfiguration.class);
+        ac.refresh();
+    }
 
-        annotationConfigApplicationContext.getEnvironment().setActiveProfiles(production ? PRODUCTION_PROFILE : DEVELOPMENT_PROFILE);
+    static void runWithSpringBoot() {
+        SpringApplication.run(ServiceConfiguration.class);
+    }
 
-        annotationConfigApplicationContext.register(ServiceConfiguration.class);
-
-
+    public static void main(String[] arrrImAPirate) throws Throwable {
+//        runWithApplicationContext();
+        runWithSpringBoot();
     }
 
 }
@@ -98,7 +102,7 @@ class CustomerService {
 class ServiceConfiguration {
 
     public static final String PRODUCTION_PROFILE = "production";
-    public static final String DEVELOPMENT_PROFILE = "development";
+    public static final String DEVELOPMENT_PROFILE = "test";
 
     @Bean
     public PlatformTransactionManager transactionManager(DataSource dataSource) {
