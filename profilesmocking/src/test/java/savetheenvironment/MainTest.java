@@ -1,33 +1,30 @@
 package savetheenvironment;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import savetheenvironment.embedded.ServiceConfiguration;
 import savetheenvironment.embedded.video.VideoSearch;
 
 import java.util.List;
 
 
-//TODO load spring context and call main.videoSearch.lookupVideo("Kevin Nilson");
-@RunWith(JUnit4.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {ServiceConfiguration.class})
+@ActiveProfiles(ServiceConfiguration.PROFILE_VIDEO_MOCK)
+
+
 public class MainTest {
 
-    private static Log log = LogFactory.getLog(MainTest.class);
+    @Autowired
+    private VideoSearch videoSearch;
 
     @Test
     public void testVideoSearch() throws Exception {
-        boolean production = false;
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-        ac.getEnvironment().setActiveProfiles(production ? ServiceConfiguration.PROFILE_VIDEO_YOUTUBE : ServiceConfiguration.PROFILE_VIDEO_MOCK);
-        ac.register(ServiceConfiguration.class);
-        ac.refresh();
-        VideoSearch videoSearch = ac.getBean(VideoSearch.class);
-
-
         List<String> videoTitles = videoSearch.lookupVideo("Kevin Nilson");
 
         System.out.println("************** TEST VIDEO SEARCH RESULTS ************** ");
