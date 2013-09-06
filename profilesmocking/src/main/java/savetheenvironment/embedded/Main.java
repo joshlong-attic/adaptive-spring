@@ -11,11 +11,9 @@ import savetheenvironment.embedded.video.VideoSearch;
 
 import java.util.List;
 
-@Service
 public class Main {
 
-    @Autowired
-    private VideoSearch videoSearch;
+
 
 
     private static Log log = LogFactory.getLog(Main.class);
@@ -35,8 +33,8 @@ public class Main {
         AnnotationConfigApplicationContext applicationContext = runWithApplicationContext();
 
 
-        Main main = applicationContext.getBean(Main.class);
-        List<String> videoTitles = main.videoSearch.lookupVideo("Kevin Nilson");
+       VideoSearch videoSearch = applicationContext.getBean(VideoSearch.class);
+        List<String> videoTitles = videoSearch.lookupVideo("Kevin Nilson");
 
         System.out.println("************** MAIN VIDEO SEARCH RESULTS ************** ") ;
 
@@ -47,7 +45,5 @@ public class Main {
 
     }
 
-    public VideoSearch getVideoSearch(){
-        return videoSearch;
-    }
+
 }

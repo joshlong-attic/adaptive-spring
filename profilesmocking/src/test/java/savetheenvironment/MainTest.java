@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import savetheenvironment.embedded.Main;
 import savetheenvironment.embedded.ServiceConfiguration;
+import savetheenvironment.embedded.video.VideoSearch;
 
 import java.util.List;
 
@@ -25,12 +25,12 @@ public class MainTest {
         ac.getEnvironment().setActiveProfiles(production ? ServiceConfiguration.PROFILE_VIDEO_YOUTUBE : ServiceConfiguration.PROFILE_VIDEO_MOCK);
         ac.register(ServiceConfiguration.class);
         ac.refresh();
-        Main main = ac.getBean(Main.class);
+        VideoSearch videoSearch = ac.getBean(VideoSearch.class);
 
 
-        List<String> videoTitles = main.getVideoSearch().lookupVideo("Kevin Nilson");
+        List<String> videoTitles = videoSearch.lookupVideo("Kevin Nilson");
 
-        System.out.println("************** TEST VIDEO SEARCH RESULTS ************** ") ;
+        System.out.println("************** TEST VIDEO SEARCH RESULTS ************** ");
         for (String title : videoTitles) {
             System.out.println(title);
         }
