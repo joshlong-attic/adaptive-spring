@@ -1,0 +1,1 @@
+mvn clean install exec:java -Dexec.mainClass="savetheenvironment.embedded.Main"
