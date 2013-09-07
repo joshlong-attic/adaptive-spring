@@ -13,7 +13,7 @@ public class Main {
         Cat cat = annotationConfigApplicationContext.getBean(Cat.class);
         JmxCatAdmin catAdmin = annotationConfigApplicationContext.getBean(JmxCatAdmin.class);
 
-        catAdmin.updateCat("Mikey");
+        catAdmin.updateCat("Spot");
 
         RefreshableBeanFactoryBean.Refreshable refreshableBean
                 = (RefreshableBeanFactoryBean.Refreshable) cat;
@@ -22,7 +22,7 @@ public class Main {
 
         System.out.println("the cat's name is " + cat.getName());
 
-        catAdmin.updateCat("Josh");
+        catAdmin.updateCat("Whiskers");
         refreshableBean.refresh();
 
         System.out.println("the cat's name is " + cat.getName());
