@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {CatConfiguration.class})
-public class RefreshableBeanFactoryBeanTest {
+public class RefreshableFactoryBeanTest {
 
     @Inject
     private Cat cat;
@@ -24,7 +24,7 @@ public class RefreshableBeanFactoryBeanTest {
     @Test
     public void testRefreshableBeans() {
 
-        RefreshableBeanFactoryBean.Refreshable refreshableBean = (RefreshableBeanFactoryBean.Refreshable) cat;
+        RefreshableFactoryBean.Refreshable refreshableBean = (RefreshableFactoryBean.Refreshable) cat;
 
         Assert.assertTrue(StringUtils.isEmpty(cat.getName()));
 

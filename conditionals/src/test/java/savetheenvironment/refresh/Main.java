@@ -15,8 +15,8 @@ public class Main {
 
         catAdmin.updateCat("Spot");
 
-        RefreshableBeanFactoryBean.Refreshable refreshableBean
-                = (RefreshableBeanFactoryBean.Refreshable) cat;
+        RefreshableFactoryBean.Refreshable refreshableBean
+                = (RefreshableFactoryBean.Refreshable) cat;
 
         refreshableBean.refresh();
 

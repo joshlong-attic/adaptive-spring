@@ -18,14 +18,14 @@ import javax.inject.Provider;
 
     @Bean
     public Cat refreshableCat(final CatAdmin catAdmin) throws Throwable {
-        RefreshableBeanFactoryBean<Cat> catRefreshableBeanFactoryBean =
-                new RefreshableBeanFactoryBean<Cat>(new Provider<Cat>() {
+        RefreshableFactoryBean<Cat> catRefreshableFactoryBean =
+                new RefreshableFactoryBean<Cat>(new Provider<Cat>() {
                     @Override
                     public Cat get() {
                         return catAdmin.getCat();
                     }
                 });
-        return catRefreshableBeanFactoryBean.getObject();
+        return catRefreshableFactoryBean.getObject();
     }
 
 }

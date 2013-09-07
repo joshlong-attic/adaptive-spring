@@ -4,6 +4,8 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.util.ReflectionUtils;
 
 import javax.inject.Provider;
@@ -16,16 +18,16 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * @author Josh Long
  */
-public class RefreshableBeanFactoryBean<T> implements FactoryBean<T> {
+public class RefreshableFactoryBean<T> implements FactoryBean<T> {
 
     private final AtomicReference<T> atomicReference = new AtomicReference<T>();
     private Provider<T> provider;
 
-    public RefreshableBeanFactoryBean(Provider<T> provider) {
+    public RefreshableFactoryBean(Provider<T> provider) {
         this.provider = provider;
     }
 
-    public RefreshableBeanFactoryBean(T initialRef, Provider<T> provider) {
+    public RefreshableFactoryBean(T initialRef, Provider<T> provider) {
         this.provider = provider;
         this.atomicReference.set(initialRef);
     }
@@ -47,26 +49,32 @@ public class RefreshableBeanFactoryBean<T> implements FactoryBean<T> {
         pf.setProxyTargetClass(true);
         List<Class<?>> listOfClasses = new ArrayList<Class<?>>();
         listOfClasses.add(Refreshable.class);
+        listOfClasses.add(ApplicationListener.class);
         listOfClasses.addAll(Arrays.asList(t.getClass().getInterfaces()));
-
         pf.setInterfaces(listOfClasses.toArray(new Class[listOfClasses.size()]));
         pf.addAdvice(new MethodInterceptor() {
+
+            private final Method onApplicationEventMethod =
+                    ReflectionUtils.findMethod(ApplicationListener.class, "onApplicationEvent", ApplicationEvent.class);
 
             private final Method refreshMethod =
                     ReflectionUtils.findMethod(Refreshable.class, "refresh");
 
             @Override
             public Object invoke(MethodInvocation invocation) throws Throwable {
+                 Method method = invocation.getMethod();
                 // if someone externally calls refresh, then rebuild the reference
-                if (invocation.getMethod().equals(refreshMethod)) {
+                if ( method.equals(refreshMethod)) {
                     updateBeanReference();
                     return atomicReference.get();
-                } else {
-                    // otherwise send the request on through to the underlying object unchanged
-                    Object ref = atomicReference.get();
-                    Method method = invocation.getMethod();
-                    return method.invoke(ref, invocation.getArguments());
+                } else if ( method.equals(onApplicationEventMethod)) {
+                    updateBeanReference();
+                    return null;
                 }
+                // otherwise send the request on through to the underlying object unchanged
+                Object ref = atomicReference.get();
+                return method.invoke(ref, invocation.getArguments());
+
             }
         });
         Object o = pf.getProxy();
