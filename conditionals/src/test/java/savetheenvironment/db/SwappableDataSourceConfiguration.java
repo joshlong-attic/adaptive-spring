@@ -18,7 +18,6 @@ import java.sql.Driver;
 @PropertySource("/config.properties")
 public class SwappableDataSourceConfiguration {
 
-
     public static final String DB_URL = "db.url";
     public static final String DB_DRIVER_CLASS = "db.driverClass";
     public static final String DB_USER = "db.user";
