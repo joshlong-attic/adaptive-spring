@@ -7,7 +7,7 @@
         <version>0.5.0.BUILD-SNAPSHOT</version>
     </parent>
     <groupId>savethenevironment</groupId>
-    <artifactId>conditionals101</artifactId>
+    <artifactId>contextparents</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <dependencies>
         <dependency>

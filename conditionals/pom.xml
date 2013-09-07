@@ -7,7 +7,7 @@
         <version>0.5.0.BUILD-SNAPSHOT</version>
     </parent>
     <groupId>savethenevironment</groupId>
-    <artifactId>conditionals101</artifactId>
+    <artifactId>conditionals</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <dependencies>
         <dependency>
@@ -18,6 +18,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
