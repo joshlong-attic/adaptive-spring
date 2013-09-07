@@ -3,16 +3,14 @@ package savetheenvironment.refresh;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.util.StringUtils;
+import savetheenvironment.Cat;
+import savetheenvironment.CatAdmin;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {CatConfiguration.class})
@@ -26,8 +24,7 @@ public class RefreshableBeanFactoryBeanTest {
     @Test
     public void testRefreshableBeans() {
 
-        RefreshableBeanFactoryBean.Refreshable refreshableBean =
-                (RefreshableBeanFactoryBean.Refreshable) cat;
+        RefreshableBeanFactoryBean.Refreshable refreshableBean = (RefreshableBeanFactoryBean.Refreshable) cat;
 
         Assert.assertTrue(StringUtils.isEmpty(cat.getName()));
 
@@ -49,53 +46,4 @@ public class RefreshableBeanFactoryBeanTest {
     }
 }
 
-@Configuration
-class CatConfiguration {
 
-    @Bean
-    public CatAdmin catAdmin() {
-        return new CatAdmin();
-    }
-
-    @Bean
-    public Cat refreshableCat(final CatAdmin catAdmin) throws Throwable {
-        RefreshableBeanFactoryBean<Cat> catRefreshableBeanFactoryBean =
-                new RefreshableBeanFactoryBean<Cat>(new Provider<Cat>() {
-                    @Override
-                    public Cat get() {
-                        return catAdmin.getCat();
-                    }
-                });
-        return catRefreshableBeanFactoryBean.getObject();
-    }
-
-}
-
-class CatAdmin {
-
-    private String name;
-
-    public Cat getCat() {
-        return new Cat(this.name);
-    }
-
-    public void updateCat(String name) {
-        this.name = name;
-    }
-}
-
-class Cat {
-
-    private String name;
-
-    public Cat() {
-    }
-
-    public Cat(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-}

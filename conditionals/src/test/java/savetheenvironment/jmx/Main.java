@@ -1,17 +1,17 @@
-package savetheenvironment.refresh;
+package savetheenvironment.jmx;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import savetheenvironment.Cat;
-import savetheenvironment.CatAdmin;
+import savetheenvironment.refresh.RefreshableBeanFactoryBean;
 
 public class Main {
 
     static public void main(String[] args) throws Throwable {
         AnnotationConfigApplicationContext annotationConfigApplicationContext
-                = new AnnotationConfigApplicationContext(CatConfiguration.class);
+                = new AnnotationConfigApplicationContext( CatConfiguration.class);
 
         Cat cat = annotationConfigApplicationContext.getBean(Cat.class);
-        CatAdmin catAdmin = annotationConfigApplicationContext.getBean(CatAdmin.class);
+        JmxCatAdmin catAdmin = annotationConfigApplicationContext.getBean(JmxCatAdmin.class);
 
         catAdmin.updateCat("Mikey");
 
