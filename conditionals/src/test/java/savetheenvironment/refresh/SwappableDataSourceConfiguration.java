@@ -1,4 +1,4 @@
-package savetheenvironment.db;
+package savetheenvironment.refresh;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import savetheenvironment.refresh.RefreshableFactoryBean;
 
 import javax.inject.Provider;
 import javax.sql.DataSource;

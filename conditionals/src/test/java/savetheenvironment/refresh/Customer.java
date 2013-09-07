@@ -1,4 +1,4 @@
-package savetheenvironment.db;
+package savetheenvironment.refresh;
 
 public class Customer {
     private String firstName, lastName;

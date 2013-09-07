@@ -1,4 +1,4 @@
-package savetheenvironment.db;
+package savetheenvironment.refresh;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
