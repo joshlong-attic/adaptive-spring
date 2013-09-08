@@ -12,9 +12,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import javax.sql.DataSource;
 import java.sql.Driver;
 
-/**
- * @author Josh Long
- */
 @PropertySource("/config.properties")
 @Configuration
 public class ServiceConfiguration {

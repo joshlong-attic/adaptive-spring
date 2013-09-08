@@ -10,8 +10,6 @@ import org.springframework.util.Assert;
 import javax.inject.Inject;
 
 
-/**
- */
 @ContextConfiguration(classes = {ServiceConfiguration.class})
 @ActiveProfiles(ServiceConfiguration.PROFILE_VIDEO_MOCK)
 @RunWith(SpringJUnit4ClassRunner.class)
