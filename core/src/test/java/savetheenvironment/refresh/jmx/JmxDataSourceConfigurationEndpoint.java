@@ -50,7 +50,7 @@ public class JmxDataSourceConfigurationEndpoint
         MapPropertySource mapPropertySource = new MapPropertySource("databaseConfiguration", propertiesForDataSource);
 
         this.environment.getPropertySources().addFirst(mapPropertySource);
-        applicationContext.publishEvent(new RefreshEvent( this.dataSource));
+        applicationContext.publishEvent(new RefreshEvent(this.dataSource));
     }
 
 }

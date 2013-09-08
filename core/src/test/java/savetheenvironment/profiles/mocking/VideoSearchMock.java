@@ -11,7 +11,7 @@ import java.util.List;
 public class VideoSearchMock implements VideoSearch {
     @Override
     public List<String> lookupVideo(String searchTerm) throws Exception {
-        List<String> results=new ArrayList<String>();
+        List<String> results = new ArrayList<String>();
         results.add("HTML5 Testing in All Browsers with Java");
         results.add("GTUG - Interview at Google I/O 2009");
         return results;

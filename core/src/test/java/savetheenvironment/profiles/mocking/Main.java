@@ -8,7 +8,7 @@ import java.util.List;
 public class Main {
 
     static AnnotationConfigApplicationContext runWithApplicationContext() {
-        boolean production =  false ;
+        boolean production = false;
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
         ac.getEnvironment().setActiveProfiles(production ? ServiceConfiguration.PROFILE_VIDEO_YOUTUBE : ServiceConfiguration.PROFILE_VIDEO_MOCK);
         ac.register(ServiceConfiguration.class);

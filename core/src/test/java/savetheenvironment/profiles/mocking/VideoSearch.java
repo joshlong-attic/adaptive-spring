@@ -1,7 +1,7 @@
 package savetheenvironment.profiles.mocking;
 
-import java.lang.Exception;import java.lang.String;import java.util.List;
+import java.util.List;
 
 public interface VideoSearch {
- List<String> lookupVideo(String searchTerm) throws Exception;
+    List<String> lookupVideo(String searchTerm) throws Exception;
 }

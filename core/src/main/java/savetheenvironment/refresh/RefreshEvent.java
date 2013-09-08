@@ -3,9 +3,10 @@ package savetheenvironment.refresh;
 import org.springframework.context.ApplicationEvent;
 
 public class RefreshEvent extends ApplicationEvent {
-    public Object getRefreshedObject(){
+    public Object getRefreshedObject() {
         return this.getSource();
     }
+
     /**
      * Create a new ApplicationEvent.
      *

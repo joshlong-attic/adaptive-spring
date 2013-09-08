@@ -14,7 +14,7 @@ import java.lang.annotation.Annotation;
  * @author Josh Long
  */
 public class OnPropertiesPresentCondition extends SpringBootCondition {
-    private String [] keys = {};
+    private String[] keys = {};
 
     protected Class<? extends Annotation> getConditionalAnnotationType() {
         return ConditionalOnPropertiesPresent.class;

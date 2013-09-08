@@ -10,10 +10,10 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableMBeanExport
-@Import( SwappableDataSourceConfiguration.class)
+@Import(SwappableDataSourceConfiguration.class)
 public class JmxSwappableDataSourceConfiguration {
     @Bean
-    public JmxDataSourceConfigurationEndpoint dataSourceConfigurationEndpoint(DataSource dataSource){
-        return new JmxDataSourceConfigurationEndpoint( dataSource);
+    public JmxDataSourceConfigurationEndpoint dataSourceConfigurationEndpoint(DataSource dataSource) {
+        return new JmxDataSourceConfigurationEndpoint(dataSource);
     }
 }

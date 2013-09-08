@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 /**
  * Demonstrates how to use the {@link org.springframework.context.ApplicationContext application context} itself to
  * <EM>swap</EM> one bean for another.
- *
  */
 public class Main {
 
@@ -24,7 +23,7 @@ public class Main {
         childContext.register(BConfiguration.class);
         childContext.refresh();
 
-        B anotherBean = childContext.getBean(B.class) ;
+        B anotherBean = childContext.getBean(B.class);
         Assert.notNull(anotherBean);
 
         // then, access A (which came to us from the original context)

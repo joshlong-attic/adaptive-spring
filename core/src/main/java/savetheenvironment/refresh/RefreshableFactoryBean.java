@@ -39,7 +39,7 @@ public class RefreshableFactoryBean<T> implements FactoryBean<T> {
             try {
                 ((DisposableBean) existingReference).destroy();
             } catch (Exception e) {
-              // don't care
+                // don't care
             }
         }
         this.atomicReference.set(this.provider.get());

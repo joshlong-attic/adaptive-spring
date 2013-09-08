@@ -9,7 +9,6 @@ import java.lang.annotation.*;
  * present - permits the creation of the bean.
  *
  * @author Josh Long
- *
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -19,5 +18,5 @@ public @interface ConditionalOnPropertiesPresent {
     /*
      * the root for the configuration properties, e.g, the value $ROOT in the expression <CODE>$ROOT.username</CODE>.
      */
-    String [] value() default "";
+    String[] value() default "";
 }

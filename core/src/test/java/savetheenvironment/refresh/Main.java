@@ -12,26 +12,26 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws Exception  {
+    public static void main(String[] args) throws Exception {
         ApplicationContext applicationContext = SpringApplication.run(SwappableDataSourceConfiguration.class);
 
         DataSource dataSource = applicationContext.getBean(DataSource.class);
 
         CustomerService customerService = applicationContext.getBean(CustomerService.class);
 
-        String h2DriverString = "org.h2.Driver" ;
-        Class<Driver> driver = (Class<Driver>) Class.<Driver>forName(h2DriverString) ;
+        String h2DriverString = "org.h2.Driver";
+        Class<Driver> driver = (Class<Driver>) Class.<Driver>forName(h2DriverString);
         // only has odd records
-        updateDataSourceConnectionParams(applicationContext, dataSource , "sa", "", "jdbc:h2:tcp://localhost/~/crm_a", driver);
+        updateDataSourceConnectionParams(applicationContext, dataSource, "sa", "", "jdbc:h2:tcp://localhost/~/crm_a", driver);
         workWithService(customerService);
 
         // only has even records
-        updateDataSourceConnectionParams(applicationContext, dataSource , "sa", "", "jdbc:h2:tcp://localhost/~/crm_b", driver);
+        updateDataSourceConnectionParams(applicationContext, dataSource, "sa", "", "jdbc:h2:tcp://localhost/~/crm_b", driver);
         workWithService(customerService);
     }
 
     public static void workWithService(CustomerService customerService) {
-        System.out.println( "----------------------------------------");
+        System.out.println("----------------------------------------");
         List<Customer> customers = customerService.loadAllCustomers();
         for (Customer customer : customers)
             System.out.println(customer.toString());
