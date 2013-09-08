@@ -1,4 +1,4 @@
-package savetheenvironment.embedded.video;
+package savetheenvironment.video;
 
 import com.google.gdata.client.youtube.YouTubeQuery;
 import com.google.gdata.client.youtube.YouTubeService;
@@ -7,7 +7,6 @@ import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gdata.util.ServiceException;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import savetheenvironment.embedded.ServiceConfiguration;
 
 import java.io.IOException;
 import java.net.URL;

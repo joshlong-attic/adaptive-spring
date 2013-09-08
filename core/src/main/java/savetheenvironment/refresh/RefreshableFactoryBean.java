@@ -39,12 +39,9 @@ public class RefreshableFactoryBean<T> implements FactoryBean<T> {
             try {
                 ((DisposableBean) existingReference).destroy();
             } catch (Exception e) {
-                // don't care
+              // don't care
             }
         }
-
-        existingReference = null;
-
         this.atomicReference.set(this.provider.get());
     }
 
@@ -69,8 +66,10 @@ public class RefreshableFactoryBean<T> implements FactoryBean<T> {
 
             private final Method disposeMethod =
                     ReflectionUtils.findMethod(DisposableBean.class, "destroy");
+
             private final Method onApplicationEventMethod =
                     ReflectionUtils.findMethod(ApplicationListener.class, "onApplicationEvent", ApplicationEvent.class);
+
             private final Method refreshMethod =
                     ReflectionUtils.findMethod(Refreshable.class, "refresh");
 
