@@ -4,13 +4,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
 import javax.sql.DataSource;
+import java.util.Collection;
 
 
 public class Main {
     public static void main(String[] args) {
+
         ApplicationContext applicationContext = SpringApplication.run(ServiceConfiguration.class);
-        int sizeOfDataSources = applicationContext.getBeansOfType(DataSource.class).size();
-        System.out.println("Found " + sizeOfDataSources + " DataSource(s).");
+
+        Collection<DataSource> coll = applicationContext.getBeansOfType(DataSource.class).values();
+        System.out.println("Found " + coll.size() + " DataSource(s).");
+
+
     }
 }
 

@@ -8,31 +8,24 @@ import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
 
-import static savetheenvironment.conditional.DataSourceConfigurationKeyGenerator.*;
-
 /**
  * Looks for properties of the form {@code $db.username}, {@code $db.password}, etc.
  *
  * @author Josh Long
  */
-public class OnDataSourceConfigurationPropertiesCondition extends SpringBootCondition {
-    private String root = null;
+public class OnPropertiesPresentCondition extends SpringBootCondition {
+    private String [] keys = {};
 
     protected Class<? extends Annotation> getConditionalAnnotationType() {
-        return ConditionalOnDataSourceConfigurationProperties.class;
+        return ConditionalOnPropertiesPresent.class;
     }
 
     @Override
     public Outcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        root = (String) metadata.getAnnotationAttributes(
+        keys = (String[]) metadata.getAnnotationAttributes(
                 getConditionalAnnotationType().getName()).get("value");
         Environment environment = context.getEnvironment();
-        String keys[] = {
-                driverClassEnvironmentKey(root),
-                passwordEnvironmentKey(root),
-                userEnvironmentKey(root),
-                urlEnvironmentKey(root)
-        };
+
         String[] props = new String[keys.length];
         for (int i = 0; i < keys.length; i++) {
             props[i] = environment.getProperty(keys[i]);

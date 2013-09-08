@@ -14,10 +14,10 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Conditional(OnDataSourceConfigurationPropertiesCondition.class)
-public @interface ConditionalOnDataSourceConfigurationProperties {
+@Conditional(OnPropertiesPresentCondition.class)
+public @interface ConditionalOnPropertiesPresent {
     /*
      * the root for the configuration properties, e.g, the value $ROOT in the expression <CODE>$ROOT.username</CODE>.
      */
-    String value() default "";
+    String [] value() default "";
 }

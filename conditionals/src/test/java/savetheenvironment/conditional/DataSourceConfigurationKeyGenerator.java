@@ -3,7 +3,6 @@ package savetheenvironment.conditional;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-import javax.sql.DataSource;
 import java.sql.Driver;
 
 /**
@@ -31,7 +30,7 @@ public abstract  class DataSourceConfigurationKeyGenerator {
         return root + "." + end;
     }
 
-    public static DataSource dataSourceFromConfigurationProperties(String root, Environment e) {
+    public static SimpleDriverDataSource dataSourceFromConfigurationProperties(String root, Environment e) {
         try {
             String user = e.getProperty(userEnvironmentKey(root)),
                     pw = e.getProperty(passwordEnvironmentKey(root)),
