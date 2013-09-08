@@ -1,4 +1,4 @@
-package savetheenvironment.video;
+package savetheenvironment.mocking;
 
 import com.google.gdata.client.youtube.YouTubeQuery;
 import com.google.gdata.client.youtube.YouTubeService;
