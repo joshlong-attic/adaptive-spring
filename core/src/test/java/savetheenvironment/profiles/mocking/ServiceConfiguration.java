@@ -1,4 +1,4 @@
-package savetheenvironment.mocking;
+package savetheenvironment.profiles.mocking;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

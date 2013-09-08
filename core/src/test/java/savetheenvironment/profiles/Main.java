@@ -1,6 +1,7 @@
 package savetheenvironment.profiles;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
@@ -19,7 +20,9 @@ import java.sql.Driver;
 
 public class Main {
     public static void main(String[] arrrImAPirate) throws Throwable {
-        SpringApplication.run(ServiceConfiguration.class);
+        ApplicationContext annotationConfigApplicationContext = SpringApplication.run(ServiceConfiguration.class);
+        DataSource dataSource = annotationConfigApplicationContext.getBean(DataSource.class);
+        System.out.println("Retrieved " + dataSource.toString());
     }
 }
 

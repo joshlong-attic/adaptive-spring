@@ -1,4 +1,4 @@
-package savetheenvironment.mocking;
+package savetheenvironment.profiles.mocking;
 
 import java.lang.Exception;import java.lang.String;import java.util.List;
 
