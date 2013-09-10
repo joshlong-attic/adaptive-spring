@@ -8,9 +8,10 @@ import java.util.List;
 public class Main {
 
     static AnnotationConfigApplicationContext runWithApplicationContext() {
-        boolean production = false;
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-        ac.getEnvironment().setActiveProfiles(production ? ServiceConfiguration.PROFILE_VIDEO_YOUTUBE : ServiceConfiguration.PROFILE_VIDEO_MOCK);
+
+        ac.getEnvironment().setActiveProfiles(ServiceConfiguration.PROFILE_VIDEO_YOUTUBE );
+
         ac.register(ServiceConfiguration.class);
         ac.refresh();
         return ac;
@@ -21,7 +22,8 @@ public class Main {
         VideoSearch videoSearch = applicationContext.getBean(VideoSearch.class);
         List<String> videoTitles = videoSearch.lookupVideo("Kevin Nilson");
 
-        System.out.println("************** MAIN VIDEO SEARCH RESULTS ************** ");
+        System.out.println();
+        System.out.println("************** VIDEO SEARCH RESULTS - YOUTUBE ************** ");
 
         for (String title : videoTitles) {
             System.out.println(title);
