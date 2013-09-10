@@ -2,11 +2,7 @@ package savetheenvironment.embedded;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import savetheenvironment.embedded.video.VideoSearch;
 
 import java.util.List;
@@ -36,12 +32,13 @@ public class Main {
        VideoSearch videoSearch = applicationContext.getBean(VideoSearch.class);
         List<String> videoTitles = videoSearch.lookupVideo("Kevin Nilson");
 
-        System.out.println("************** MAIN VIDEO SEARCH RESULTS ************** ") ;
+        System.out.println("************** START - MAIN VIDEO SEARCH RESULTS ************** ") ;
 
         for(String title:videoTitles){
             System.out.println(title);
         }
 
+        System.out.println("************** END - MAIN VIDEO SEARCH RESULTS ************** ") ;
 
     }
 

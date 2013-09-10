@@ -27,9 +27,10 @@ public class MainTest {
     public void testVideoSearch() throws Exception {
         List<String> videoTitles = videoSearch.lookupVideo("Kevin Nilson");
 
-        System.out.println("************** TEST VIDEO SEARCH RESULTS ************** ");
+        System.out.println("************** START - TEST VIDEO SEARCH RESULTS ************** ");
         for (String title : videoTitles) {
             System.out.println(title);
         }
+        System.out.println("************** END - TEST VIDEO SEARCH RESULTS ************** ");
     }
 }
