@@ -2,8 +2,10 @@ package savetheenvironment.profiles.mocking;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 
+@PropertySource("/config.properties")
 @ComponentScan
 @Configuration
 public class ServiceConfiguration {
