@@ -2,5 +2,7 @@ target
 *project
 .idea
 *iml
+run.sh~
+~.gitignore
 *settings
 *classpath
