@@ -1,1 +1,1 @@
-ssh -i ~/Downloads/javaclimberkey3.pem ec2-user@ec2-54-211-167-210.compute-1.amazonaws.com
+ssh -i ~/Desktop/ec2.pem ec2-user@ec2-54-211-167-210.compute-1.amazonaws.com
