@@ -1,3 +1,13 @@
-target/
-.idea/
-*.iml
+target
+*project
+.idea
+*iml
+run.sh~
+~.gitignore
+*settings
+*classpath
+.classpath
+.project
+.settings/
+.gitignore~
+
