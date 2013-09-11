@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -30,26 +31,14 @@ public class HelloWeConfiguration {
 
                     public void initialize(AnnotationConfigWebApplicationContext appContext) {
 
-                        String profileSystemProperty = System.getProperty("profile");
+                        String profile = System.getProperty("profile");
 
-                        System.out.println("********** profileSystemProperty=" + profileSystemProperty);
+                        profile = StringUtils.hasText(profile) ? profile : AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME;
+                        if (StringUtils.hasText(profile)) {
+                            System.out.println(String.format("Current Profile: '%s'", profile));
+                            appContext.getEnvironment().setActiveProfiles(profile);
+                        }
 
-                        String profile;
-
-                        if ("bacon".equalsIgnoreCase(profileSystemProperty))
-                            profile = "bacon";
-                        else if ("cat".equalsIgnoreCase(profileSystemProperty))
-                            profile = "cat";
-                        else if ("kitten".equalsIgnoreCase(profileSystemProperty))
-                            profile = "kitten";
-                        else
-                            profile = "lost";
-
-
-                        System.out.println("********** profile=" + profile);
-
-
-                        appContext.getEnvironment().setActiveProfiles(profile);
                         appContext.refresh();
 
                     }
@@ -80,6 +69,15 @@ class CloudController {
 
 }
 
+@Profile("cloud")
+@Service
+class HelloCloudService implements HelloService {
+    @Override
+    public String hello() {
+        return "I <3 Cloud Foundry";
+    }
+}
+
 @Profile("bacon")
 @Service
 class HelloBaconService implements HelloService {
@@ -104,9 +102,9 @@ class HelloKittenService implements HelloService {
     }
 }
 
-@Profile(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME)
+@Profile("default")
 @Service
-class HelloLostService implements HelloService {
+class HelloDefaultService implements HelloService {
     @Override
     public String hello() {
         return "I am lost";
