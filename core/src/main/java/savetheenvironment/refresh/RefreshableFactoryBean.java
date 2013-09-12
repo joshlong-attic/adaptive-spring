@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package savetheenvironment.refresh;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -17,6 +33,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ *
  * @author Josh Long
  */
 public class RefreshableFactoryBean<T> implements FactoryBean<T> {
@@ -56,21 +73,22 @@ public class RefreshableFactoryBean<T> implements FactoryBean<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T getObject() throws Exception {
 
         if (null == this.atomicReference.get()) {
             updateBeanReference();
         }
 
-        T t = atomicReference.get();
+        T beanReference = atomicReference.get();
 
-        ProxyFactory pf = new ProxyFactory(t);
+        ProxyFactory pf = new ProxyFactory(beanReference);
         pf.setProxyTargetClass(true);
         List<Class<?>> listOfClasses = new ArrayList<Class<?>>();
         listOfClasses.add(Refreshable.class);
         listOfClasses.add(ApplicationListener.class);
         listOfClasses.add(DisposableBean.class);
-        listOfClasses.addAll(Arrays.asList(t.getClass().getInterfaces()));
+        listOfClasses.addAll(Arrays.asList(beanReference.getClass().getInterfaces()));
         pf.setInterfaces(listOfClasses.toArray(new Class[listOfClasses.size()]));
         pf.addAdvice(new MethodInterceptor() {
 
