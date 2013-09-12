@@ -33,7 +33,8 @@ public class OnPropertiesPresentCondition extends SpringBootCondition {
         boolean allPropertiesPresent = allNotNull(props);
         return allPropertiesPresent ?
                 Outcome.match() :
-                Outcome.noMatch("the properties " + StringUtils.arrayToCommaDelimitedString(keys) + " were not present.");
+                Outcome.noMatch("the properties " +
+                        StringUtils.arrayToCommaDelimitedString(keys) + " were not present.");
     }
 
     private boolean allNotNull(String... args) {

@@ -14,11 +14,13 @@ public class Main {
     public static void main(String[] args) {
 
         // create a context with a single bean and obtain a reference to that bean
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AConfiguration.class);
+        AnnotationConfigApplicationContext context =
+        		new AnnotationConfigApplicationContext(AConfiguration.class);
         A original = context.getBean(A.class);
 
         // create a child context with a single bean and obtain a reference to that bean
-        AnnotationConfigApplicationContext childContext = new AnnotationConfigApplicationContext();
+        AnnotationConfigApplicationContext childContext =
+        		new AnnotationConfigApplicationContext();
         childContext.setParent(context);
         childContext.register(BConfiguration.class);
         childContext.refresh();

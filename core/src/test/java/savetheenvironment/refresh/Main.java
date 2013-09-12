@@ -1,7 +1,7 @@
 package savetheenvironment.refresh;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 
@@ -13,8 +13,9 @@ import java.util.Map;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		ApplicationContext applicationContext = SpringApplication
-				.run(SwappableDataSourceConfiguration.class);
+		ApplicationContext applicationContext =  
+				new AnnotationConfigApplicationContext(
+						 SwappableDataSourceConfiguration.class);
 
 		DataSource dataSource = applicationContext.getBean(DataSource.class);
 

@@ -10,10 +10,13 @@ import java.util.Collection;
 public class Main {
     public static void main(String[] args) {
 
-        ApplicationContext applicationContext =  new AnnotationConfigApplicationContext(ServiceConfiguration.class);
-
-
-        Collection<DataSource> coll = applicationContext.getBeansOfType(DataSource.class).values();
+        ApplicationContext applicationContext = 
+        		new AnnotationConfigApplicationContext(ServiceConfiguration.class);
+  
+        Collection<DataSource> coll = applicationContext
+        		.getBeansOfType(DataSource.class).values();
+        
+        
         System.out.println("Found " + coll.size() + " DataSource(s).");
 
 

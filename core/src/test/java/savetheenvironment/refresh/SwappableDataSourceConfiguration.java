@@ -41,7 +41,8 @@ public class SwappableDataSourceConfiguration {
 
     @Bean
     public DataSource dataSourceRefreshableBeanFactoryBean(final Environment environment) throws Exception {
-        RefreshableFactoryBean<DataSource> ds = new RefreshableFactoryBean<DataSource>(new Provider<DataSource>() {
+        RefreshableFactoryBean<DataSource> ds = new RefreshableFactoryBean<DataSource>(
+        		    new Provider<DataSource>() {
             @Override
             public DataSource get() {
                 try {

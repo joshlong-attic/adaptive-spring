@@ -24,11 +24,11 @@ public class Main {
     public static void main(String[] arrrImAPirate) throws Throwable {
         ApplicationContext applicationContext = runWithApplicationContext();
 
-        showEnvironment(applicationContext);
+        //showEnvironment(applicationContext);
 
-        showPropertySource(applicationContext);
+        //showPropertySource(applicationContext);
 
-        showVideos(applicationContext);
+       showVideos(applicationContext);
     }
 
     private static void showPropertySource(ApplicationContext applicationContext) {
@@ -37,16 +37,16 @@ public class Main {
         System.out.println("************ Property Source ***********");
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("db_username", "scott");
-        map.put("db_password", "tiger");
+        map.put("db.username", "scott");
+        map.put("db.password", "tiger");
 
 
         MapPropertySource mapPropertySource = new MapPropertySource("dbConfig", map);
 
         ((StandardEnvironment) applicationContext.getEnvironment()).getPropertySources().addFirst(mapPropertySource);
 
-        System.out.println("DB Username: " + applicationContext.getEnvironment().getProperty("db_username"));
-        System.out.println("DB Password: " + applicationContext.getEnvironment().getProperty("db_password"));
+        System.out.println("DB Username: " + applicationContext.getEnvironment().getProperty("db.username"));
+        System.out.println("DB Password: " + applicationContext.getEnvironment().getProperty("db.password"));
 
         System.out.println();
 

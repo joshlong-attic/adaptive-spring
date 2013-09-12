@@ -21,7 +21,17 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class RefreshableFactoryBean<T> implements FactoryBean<T> {
 
+    private final Method disposeMethod =
+            ReflectionUtils.findMethod(DisposableBean.class, "destroy");
+
+    private final Method onApplicationEventMethod =
+            ReflectionUtils.findMethod(ApplicationListener.class, "onApplicationEvent", ApplicationEvent.class);
+
+    private final Method refreshMethod =
+            ReflectionUtils.findMethod(Refreshable.class, "refresh");
+
     private final AtomicReference<T> atomicReference = new AtomicReference<T>();
+
     private Provider<T> provider;
 
     public RefreshableFactoryBean(Provider<T> provider) {
@@ -64,14 +74,6 @@ public class RefreshableFactoryBean<T> implements FactoryBean<T> {
         pf.setInterfaces(listOfClasses.toArray(new Class[listOfClasses.size()]));
         pf.addAdvice(new MethodInterceptor() {
 
-            private final Method disposeMethod =
-                    ReflectionUtils.findMethod(DisposableBean.class, "destroy");
-
-            private final Method onApplicationEventMethod =
-                    ReflectionUtils.findMethod(ApplicationListener.class, "onApplicationEvent", ApplicationEvent.class);
-
-            private final Method refreshMethod =
-                    ReflectionUtils.findMethod(Refreshable.class, "refresh");
 
             @Override
             public Object invoke(MethodInvocation invocation) throws Throwable {
